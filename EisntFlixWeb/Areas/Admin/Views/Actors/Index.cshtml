@@ -1,0 +1,74 @@
+﻿@using EisntFlix.Models.ViewsModel;
+@model IEnumerable<Actor>
+
+@{
+	ViewData["Title"] = "List of Actors";
+
+	var routeDataValues = ViewContext.RouteData.Values;
+	var routeName = "";
+	
+	RouteName();
+}
+
+<div class="row">
+	<div class="col-md-10 offset-md-1">
+
+		<table class="table">
+			<thead>
+				<tr class="text-center">
+					<th>@Html.DisplayNameFor(model => model.ProfilePictureURL)</th>
+					<th>
+						@await Html.PartialAsync("_OrderBy", new RoutesVM { Area = routeDataValues["area"].ToString(), RouteName = routeName })
+						@Html.DisplayNameFor(model => model.FullName)
+					</th>
+					<th>@Html.DisplayNameFor(model => model.Bio)</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					<tr class="text-center">
+						<td class="align-middle">
+							<img class="rounded-circle" src="@item.ProfilePictureURL" alt="@item.FullName" style="max-height:150px">
+						</td>
+
+						<td class="align-middle">
+							@Html.DisplayFor(modelItem => item.FullName)
+						</td>
+
+						<td class="align-middle" style="max-width:350px">
+							@Html.DisplayFor(modelItem => item.Bio)
+						</td>
+						@await Html.PartialAsync("_EditDetailsDelete", new RoutesVM{Area="Admin", Controller=routeDataValues["controller"].ToString(),Id=@item.Id})
+					</tr>
+				}
+
+			</tbody>
+		</table>
+	</div>
+</div>
+
+@await Html.PartialAsync("_CreateItem")
+
+@{
+	#region //View Methods
+
+	//RouteName Method
+	//**Check which action is active and the respective id route**
+	string RouteName()
+	{
+		if (routeDataValues["action"].ToString() == "Orderby")
+		{
+			routeName = routeDataValues["id"].ToString();
+			return routeName;
+		}
+		else
+		{
+			routeName = "Asc";
+			return routeName;
+		}
+
+	}
+	#endregion
+}

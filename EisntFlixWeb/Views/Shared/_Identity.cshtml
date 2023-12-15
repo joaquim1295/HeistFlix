@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using EisntFlix.Models
+@inject UserManager<ApplicationUser> UserManager;
+
+
+@if (!User.Identity.IsAuthenticated)
+{<li class="nav-item">
+    <a class="nav-link float-end" style="background:none; border-width:0" asp-area="User" asp-controller="Accounts" asp-action="Login">
+        <i class="bi bi-box-arrow-in-right"></i> Login
+    </a>
+    </li>
+    <span style="padding: 10px;"></span>
+        <li class="nav-item">
+    <a class="nav-link float-end" style="background:none; border-width:0" asp-area="User" asp-controller="Accounts" asp-action="Register">
+        <i class="bi bi-person-plus"></i> Register
+    </a>
+    </li>
+}
+else
+{
+
+    @*User profile section*@
+    <div class="nav-item dropdown">
+        <button class="btn btn-outline-success dropdown-toggle border-0" type="button" style="background:none; border-width:0;" id="profile-btn" data-toggle="dropdown" 
+            aria-expanded="false">
+            @if (User.IsInRole("Admin"))
+            { <i class="bi bi-person-gear" style="font-size:17px"></i> @UserManager.GetUserName(User)}
+            else
+            { <i class="bi bi-person" style="font-size:17px"></i> @UserManager.GetUserName(User)}
+
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="profile-btn">
+            <li>
+                <a class="dropdown-item" asp-area="Content" asp-controller="Home" asp-action="Index">
+                    <i class="bi bi-list"></i> Orders
+                </a>
+            </li>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <li>
+                    <a class="dropdown-item" asp-area="Content" asp-controller="Home" asp-action="Users">
+                        <i class="bi bi-people"></i> Users
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+    <span style="padding: 0px;"></span>
+    <li class="nav-item">
+    <form asp-area="User" asp-controller="Accounts" asp-action="Logout">
+        <button class="nav-link" style="background:none; border-width:0">
+            <i class="bi bi-box-arrow-in-right"></i> Logout
+        </button>
+    </form>
+    </li>
+}

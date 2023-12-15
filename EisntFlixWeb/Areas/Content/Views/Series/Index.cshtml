@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Serie>
+
+@{
+    ViewData["Title"] = "List of Series";
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-2 col-xs-6 border-primary mb-3">
+            <div class="card" style="min-width:265px ;max-width: 300px;">
+                <div class="row g-0">
+                    <div class="col-md-12">
+                        <div class="card-header text-white bg-black">
+                            <p class="card-text mb-1">
+                                <span class="badge bg-default  text-warning"> <i class="bi bi-star-fill"> </i>@item.Rating</span>
+                                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                    {
+                                    <a class="text-warning float-right float-end" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>
+                                    }
+
+                            </p>
+                        </div>
+                    </div>
+                    <a class="mv-img" asp-action="Details" asp-route-id="@item.Id"><img src="@item.ImageURL" width="100%" alt="@item.Name"></a>
+
+                    <div class="col-md-12">
+                        <div class="card-footer text-white bg-black">
+                            <p class="card-text mt-1 mb-1 ">
+                                <span class="badge bg-primary text-white">@item.FilmCategory</span>
+                                <span class="badge bg-success text-white">@item.Streaming.Name</span>
+                                <span class="badge bg-info text-white">Movie</span>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+@await Html.PartialAsync("_CreateItem")

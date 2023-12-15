@@ -1,0 +1,16 @@
+﻿@using EisntFlix.Models.ViewsModel
+@model RoutesVM
+
+
+@{
+if(Model.RouteName == "Asc")
+{
+		<a class="text-white fw-bolder" style="text-decoration: none; padding-left: 2px; font-size:18px" data-toggle="pill" data-placement="Top" title="Change to descending"  asp-area="@Model.Area" asp-action="@Model.Action" asp-route-id="Desc"> <i class="bi bi-sort-alpha-down"></i> </a>
+}
+else if(Model.RouteName == "Desc")
+{
+		<a class="text-white fw-bolder" style="text-decoration: none; padding-left: 2px; font-size:18px" data-toggle="pill" data-placement="Top" title="Change to ascending" asp-area="@Model.Area" asp-action="@Model.Action" asp-route-id="Asc"> <i class="bi bi-sort-alpha-up"></i> </a>
+}
+else
+{}
+}

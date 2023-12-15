@@ -1,0 +1,8 @@
+﻿@using EisntFlix.Models.ViewsModel
+@model RoutesVM
+
+<td class="align-middle">
+    <div><a type="button" class="text-muted p-2" style="width:85px; text-align:left; border:none;background:none; text-decoration:none" asp-area="@Model.Area" asp-controller="@Model.Controller" asp-action="Edit" asp-route-id="@Model.Id"><i class="bi bi-pencil-square"></i> Edit</a></div>
+    <div><a type="button" class="text-primary p-2" style="width:85px; text-align:left; border:none;background:none; text-decoration:none" asp-area="@Model.Area" asp-controller="@Model.Controller" asp-action="Details" asp-route-id="@Model.Id"><i class="bi bi-eye "></i> Details</a></div>
+    <div><a type="button" class="text-danger p-2" style="width:85px; text-align:left; border:none;background:none; text-decoration:none" asp-area="@Model.Area" asp-controller="@Model.Controller" asp-action="Delete" asp-route-id="@Model.Id"><i class="bi bi-trash align"></i> Delete</a></div>
+</td>

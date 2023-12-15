@@ -1,0 +1,30 @@
+﻿
+
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <div class="floating-container">
+        <button class=" floating-button bg-danger" style="background:none; border-width:0" data-toggle="tooltip" data-placement="left" title="Add New"><i class="bi bi-plus "></i></button>
+
+        <div class="element-container" style="opacity:90%">
+            <a asp-area="Content" asp-controller="Movies" asp-action="Create" data-toggle="tooltip" data-placement="left" title="Add Movie">
+                <span class="float-element bg-primary"> <i class="bi bi-film"></i></span>
+            </a>
+
+            <a asp-area="Content" asp-controller="Series" asp-action="Create" data-toggle="tooltip" data-placement="left" title="Add Serie">
+                <span class="float-element bg-info"> <i class="bi bi-camera-reels"></i> </span>
+            </a>
+
+            <a asp-area="Admin" asp-controller="Streamings" asp-action="Create" data-toggle="tooltip" data-placement="left" title="Add Streamer">
+                <span class="float-element bg-secondary"><i class="bi bi-cast"></i></span>
+            </a>
+
+            <a asp-area="Admin" asp-controller="Producers" asp-action="Create" data-toggle="tooltip" data-placement="left" title="Add Producer">
+                <span class="float-element bg-success"> <i class="bi bi-headset"></i></span>
+            </a>
+
+            <a asp-area="Admin" asp-controller="Actors" asp-action="Create" data-toggle="tooltip" data-placement="left" title="Add Actor">
+                <span class="float-element bg-warning"> <i class="bi bi-person-square"></i></span>
+            </a>
+        </div>
+    </div>
+}

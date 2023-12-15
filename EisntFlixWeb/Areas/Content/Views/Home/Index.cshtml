@@ -1,0 +1,89 @@
+﻿@using EisntFlix.Models.ViewsModel;
+@model FilmListVM
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<br/>
+<div class="slider movie-items pt-1">
+    <div class="container">
+        <h4>Trending Movies:</h4>
+        <div class="row ipad-width">
+            
+            <div class="slick-multiItemSlider">
+                @foreach (var movie in Model.Allmovies)
+                {
+                    <div class="movie-item col-md-4 col-xs-6 border-primary mb-3 align-self-">
+                        <div class="card m-2" style="max-width: 540px;">
+                            <div class="row g-0">
+                                <div class="col-md-12">
+                                    <div class="card-header text-white bg-black">
+                                        <p class="card-text mb-1">
+                                            <span class="badge bg-default  text-warning"> <i class="bi bi-star-fill"> </i>@movie.Rating</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <a class="mv-img" asp-area="Content" asp-controller="Movies" asp-action="Details" asp-route-id="@movie.Id"><img src="@movie.ImageURL" height="460px" width="307px" title="@movie.Name"></a>
+
+                                <div class="col-md-12">
+                                    <div class="card-footer text-white bg-black">
+                                        <p class="card-text mt-1 mb-1 ">
+                                            <span class="badge bg-primary text-white">@movie.FilmCategory</span>
+@*                                            <span class="badge bg-success text-white">@movie.Streaming.Name</span>*@
+                                            <span class="badge bg-info text-white">Movie</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<br/>
+    <div class="slider movie-items pt-1">
+        <div class="container">
+        <h4>Trending Series:</h4>
+            <div class="row ipad-width">
+                <div class="slick-multiItemSlider">
+                    @foreach (var serie in Model.Allseries)
+                    {
+                            <div class="movie-item col-md-4 col-xs-6 border-primary mb-3 align-self-">
+                                <div class="card m-2" style="max-width: 540px;">
+                                    <div class="row g-0">
+                                        <div class="col-md-12">
+                                            <div class="card-header text-white bg-black">
+                                                <p class="card-text mb-1">
+                                                    <span class="badge bg-default  text-warning"> <i class="bi bi-star-fill"> </i>@serie.Rating</span>
+
+
+                                                </p>
+                                            </div>
+                                        </div>
+                                <a class="mv-img" asp-area="Content" asp-controller="Movies" asp-action="Details" asp-route-id="@serie.Id"><img src="@serie.ImageURL" height="460px" width="307px" title="@serie.Name" alt="@serie.Name"></a>
+
+                                        <div class="col-md-12">
+                                            <div class="card-footer text-white bg-black">
+                                                <p class="card-text mt-1 mb-1 ">
+                                                    <span class="badge bg-primary text-white">@serie.FilmCategory</span>
+@*                                                    <span class="badge bg-success text-white">@serie.Streaming.Name</span>*@
+                                                    <span class="badge bg-info text-white">Movie</span>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+@await Html.PartialAsync("_CreateItem")
